@@ -1,0 +1,33 @@
+{
+    "author": "mrodrig",
+    "name": "updep",
+    "description": "An automated dependency upgrade module for NodeJS.",
+    "version": "0.0.1",
+    "repository": {
+        "type": "git",
+    	"url": "http://github.com/mrodrig/updep.git"
+    },
+    "main": "./lib/updep.js",
+    "scripts": {
+        "test": "./node_modules/.bin/mocha --reporter spec"
+    },
+    "keywords": [
+        "node",
+        "performance",
+        "analysis",
+        "node-performance",
+        "http-performance",
+        "http",
+        "https",
+        "endpoint"
+    ],
+    "dependencies": {
+    	"underscore": "~1.8.3",
+    	"bluebird"  : "~3.0.5",
+    	"request"   : "~2.65.0"
+    },
+    "devDependencies": {},
+    "engines": {
+    	"node": "*"
+    }
+}
