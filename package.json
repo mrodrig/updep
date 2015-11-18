@@ -2,7 +2,7 @@
     "author": "mrodrig",
     "name": "updep",
     "description": "An automated dependency upgrade module for NodeJS.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "repository": {
         "type": "git",
         "url": "http://github.com/mrodrig/updep.git"
@@ -27,8 +27,7 @@
         "request": "~2.66.0"
     },
     "devDependencies": {
-        "mocha": "~2.3.4",
-        "should": "~7.1.1"
+        "mocha": "~2.3.4"
     },
     "engines": {
         "node": "*"

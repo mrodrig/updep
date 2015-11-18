@@ -28,7 +28,16 @@ updep -p <path_to>/package.json
 
 #### Command Line Flags
 
-* `array` - An array of JSON documents to be converted to CSV.
+* `-h` Prints the usage information.
+* `-p` Specifies the path to the package.json to update.
+* * Example: `-p ../../package.json`
+* `-vp` Specifies a version prefix
+* * Example: `-vp '~'`
+* `-sp` Specifies the number of spaces for indentation (Default: 4)
+* * Example `-sp 2`
+* `-inc` Specifies to increment the patch version by 1 (ie. 0.0.1)
+* * Note: No arguments are required for this.
+
 
 ## Tests
 
