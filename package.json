@@ -5,7 +5,7 @@
     "version": "0.0.1",
     "repository": {
         "type": "git",
-    	"url": "http://github.com/mrodrig/updep.git"
+        "url": "http://github.com/mrodrig/updep.git"
     },
     "main": "./lib/updep.js",
     "scripts": {
@@ -22,12 +22,12 @@
         "endpoint"
     ],
     "dependencies": {
-    	"underscore": "~1.8.3",
-    	"bluebird"  : "~3.0.5",
-    	"request"   : "~2.65.0"
+        "underscore": "~1.8.3",
+        "bluebird": "~3.0.5",
+        "request": "~2.66.0"
     },
     "devDependencies": {},
     "engines": {
-    	"node": "*"
+        "node": "*"
     }
 }
