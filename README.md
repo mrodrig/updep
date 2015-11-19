@@ -1,7 +1,7 @@
 # Automatically upgrade your NPM dependencies to the latest version!
 
 [![Build Status](https://travis-ci.org/mrodrig/updep.svg?branch=master)](https://travis-ci.org/mrodrig/updep)
-![David - Dependency Checker Icon](https://david-dm.org/mrodrig/updep.png "updep Dependency Status")
+[![bitHound Dependencies](https://www.bithound.io/github/mrodrig/updep/badges/dependencies.svg)](https://www.bithound.io/github/mrodrig/updep/master/dependencies/npm)
 [![Downloads](http://img.shields.io/npm/dm/updep.svg)](https://www.npmjs.org/package/updep)
 [![NPM version](https://img.shields.io/npm/v/updep.svg)](https://www.npmjs.org/package/updep)
 [![bitHound Score](https://www.bithound.io/github/mrodrig/updep/badges/score.svg)](https://www.bithound.io/github/mrodrig/updep)
