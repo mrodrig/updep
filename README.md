@@ -30,13 +30,13 @@ updep -p <path_to>/package.json
 
 * `-h` Prints the usage information.
 * `-p` Specifies the path to the package.json to update.
-* * Example: `-p ../../package.json`
+  * Example: `-p ../../package.json`
 * `-vp` Specifies a version prefix
-* * Example: `-vp '~'`
+  * Example: `-vp '~'`
 * `-sp` Specifies the number of spaces for indentation (Default: 4)
-* * Example `-sp 2`
+  * Example `-sp 2`
 * `-inc` Specifies to increment the patch version by 1 (ie. 0.0.1)
-* * Note: No arguments are required for this.
+  * Note: No arguments are required for this.
 
 
 ## Tests
