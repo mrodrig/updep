@@ -1,10 +1,10 @@
 # Automatically upgrade your NPM dependencies to the latest version!
 
+[![Dependencies](https://img.shields.io/david/mrodrig/updep.svg?style=flat-square)](https://www.npmjs.org/package/updep)
 [![Build Status](https://travis-ci.org/mrodrig/updep.svg?branch=master)](https://travis-ci.org/mrodrig/updep)
-[![bitHound Dependencies](https://www.bithound.io/github/mrodrig/updep/badges/dependencies.svg)](https://www.bithound.io/github/mrodrig/updep/master/dependencies/npm)
 [![Downloads](http://img.shields.io/npm/dm/updep.svg)](https://www.npmjs.org/package/updep)
 [![NPM version](https://img.shields.io/npm/v/updep.svg)](https://www.npmjs.org/package/updep)
-[![bitHound Score](https://www.bithound.io/github/mrodrig/updep/badges/score.svg)](https://www.bithound.io/github/mrodrig/updep)
+[![Known Vulnerabilities](https://snyk.io/test/npm/updep/badge.svg)](https://snyk.io/test/npm/updep)
 
 This node module will convert an array of JSON documents to a CSV string.
 Column headings will be automatically generated based on the keys of the JSON documents. Nested documents will have a '.' appended between the keys.

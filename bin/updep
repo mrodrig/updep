@@ -1,1 +1,1 @@
-node ../lib/updep.js "$@"
+node ../src/updep.js "$@"

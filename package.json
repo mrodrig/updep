@@ -2,7 +2,7 @@
     "author": "mrodrig",
     "name": "updep",
     "description": "An automated dependency upgrade module for NodeJS.",
-    "version": "1.0.6",
+    "version": "1.1.0",
     "repository": {
         "type": "git",
         "url": "http://github.com/mrodrig/updep.git"
@@ -27,14 +27,14 @@
         "upgrade dependencies"
     ],
     "dependencies": {
-        "underscore": "1.8.3",
-        "bluebird": "3.5.1",
-        "request": "2.83.0"
+        "underscore": "1.9.1",
+        "bluebird": "3.5.3",
+        "request": "2.88.0"
     },
     "devDependencies": {
-        "mocha": "3.3.0"
+        "mocha": "5.2.0"
     },
     "engines": {
-        "node": "*"
+        "node": ">=6"
     }
 }
