@@ -1,12 +1,13 @@
-var promise = require('bluebird'),
+let promise = require('bluebird'),
     path = require('path'),
     p = require(path.resolve(__dirname, '../package.json'));
 
-var utilities = {
+let utilities = {
+
     /**
      * Simple function to print out the proper usage
      */
-    printUsage : function () {
+    printUsage: function() {
         console.log('UPDEP Usage:');
         console.log('  -h                    :: Print usage/help information');
         console.log('  -p <path_to_package>  :: Runs updep on the provided package.json');
@@ -20,24 +21,24 @@ var utilities = {
     /**
      * Simple function to print out the info string and return the initial promise
      */
-    printInfo : function () {
+    printInfo: function() {
         console.log('updep v' + p.version + ' ::: An automated way to update your dependencies.\n');
         return promise.resolve();
     },
-    
+
     /**
      * Simple function to notify users of invalid input and print the usage
      */
-    invalidInput : function () {
+    invalidInput: function() {
         console.log('  ERROR: Did not detect valid input\n');
         utilities.printUsage();
         return process.exit(1);
     },
-    
+
     /**
      * Simple function to print out that the operation is complete.
      */
-    notifyCompletion : function () {
+    notifyCompletion: function() {
         console.log('-> Done.');
         return process.exit(0);
     }

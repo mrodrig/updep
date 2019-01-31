@@ -12,7 +12,8 @@
         "updep": "./bin/updep"
     },
     "scripts": {
-        "test": "./node_modules/.bin/mocha --reporter spec"
+        "test": "./node_modules/.bin/mocha --reporter spec",
+        "lint": "./node_modules/.bin/eslint src test"
     },
     "keywords": [
         "node",
@@ -33,6 +34,7 @@
         "underscore": "1.9.1"
     },
     "devDependencies": {
+        "eslint": "5.12.1",
         "mocha": "5.2.0"
     },
     "engines": {

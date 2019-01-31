@@ -8,7 +8,6 @@ let path = require('path'),
     semver = require('semver'),
     requestAsync = promise.promisify(require('request')),
     _ = require('underscore'),
-    p = require(path.resolve(__dirname, '../package.json')),
     utilities = require('./utilities.js'),
     versionPromises = [],
     clientOptions = {
