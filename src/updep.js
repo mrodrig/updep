@@ -5,14 +5,15 @@ let DEBUG_MODE = true;
 let path = require('path'),
     fs = require('fs'),
     promise = require('bluebird'),
+    semver = require('semver'),
     requestAsync = promise.promisify(require('request')),
     _ = require('underscore'),
     p = require(path.resolve(__dirname, '../package.json')),
     utilities = require('./utilities.js'),
     versionPromises = [],
     clientOptions = {
-        versionPrefix : '~',
-        numSpaces     : 4
+        versionPrefix: '~',
+        numSpaces: 4
     },
     clientPackage;
 
@@ -25,7 +26,7 @@ let path = require('path'),
 function updateVersion(pkgName, depType, response) {
     clientPackage[depType][pkgName] = clientOptions.versionPrefix + response.body.version;
     console.log(' -> Updated ' + pkgName + '@' + response.body.version);
-    return ;
+
 }
 
 /**
@@ -35,12 +36,14 @@ function updateVersion(pkgName, depType, response) {
  */
 function checkVersion(depType, pkgName) {
     let versionpromise = requestAsync({
-        url  : 'http://registry.npmjs.org/{{package}}/latest'.replace(/{{package}}/g, pkgName),
-        json : true
+        url: 'http://registry.npmjs.org/{{package}}/latest'.replace(/{{package}}/g, pkgName),
+        json: true
     })
-    .then(_.partial(updateVersion, pkgName, depType))
-    .catch(function (err) { console.log(err.stack); });
-    
+        .then(_.partial(updateVersion, pkgName, depType))
+        .catch(function(err) {
+            console.log(err.stack);
+        });
+
     versionPromises.push(versionpromise);
 }
 
@@ -61,12 +64,10 @@ function updatePackages() {
  */
 function writePackage() {
     if (clientOptions.incrementPackageVersion) {
-        let patchVersionIndex = clientPackage.version.lastIndexOf('.') + 1;
-        let patchVersion = parseInt(clientPackage.version.substring(patchVersionIndex), 10);
-        clientPackage.version = clientPackage.version.substring(0, patchVersionIndex) + (++patchVersion);
+        clientPackage.version = semver.inc(clientPackage.version, 'patch');
         console.log('-> Updated package.json version to: ' + clientPackage.version);
     }
-    
+
     // stringify the package using 4 spaces identation
     let packageStr = JSON.stringify(clientPackage, undefined, clientOptions.numSpaces);
     console.log('-> Writing the updated version to ' + clientOptions.packagePath);
@@ -85,7 +86,7 @@ function parseFlags(argv) {
         } else if (argv[0] === '-p' && twoOrMoreArgs) {
             clientOptions.packagePath = argv[1];
             argv.splice(0, 2);
-            continue; 
+            continue;
         } else if (argv[0] === '-vp' && twoOrMoreArgs) {
             clientOptions.versionPrefix = argv[1];
             argv.splice(0, 2);
@@ -126,9 +127,9 @@ function catchAllErrorHandler(err) {
 
 // Run the dependency upgrade script
 utilities.printInfo()
-.then(handleInput)
-.then(parseFlags)
-.then(updatePackages)
-.then(writePackage)
-.then(utilities.notifyCompletion)
-.catch(catchAllErrorHandler);
+    .then(handleInput)
+    .then(parseFlags)
+    .then(updatePackages)
+    .then(writePackage)
+    .then(utilities.notifyCompletion)
+    .catch(catchAllErrorHandler);
