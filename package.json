@@ -2,14 +2,13 @@
     "author": "mrodrig",
     "name": "updep",
     "description": "An automated dependency upgrade module for NodeJS.",
-    "version": "1.1.0",
+    "version": "2.0.0",
     "repository": {
         "type": "git",
         "url": "http://github.com/mrodrig/updep.git"
     },
-    "main": "./lib/updep.js",
     "bin": {
-        "updep": "./bin/updep"
+        "updep": "./bin/updep.js"
     },
     "scripts": {
         "test": "./node_modules/.bin/mocha --reporter spec",
@@ -31,7 +30,7 @@
         "bluebird": "3.5.3",
         "request": "2.88.0",
         "semver": "5.6.0",
-        "underscore": "1.9.1"
+        "commander": "2.19.0"
     },
     "devDependencies": {
         "eslint": "5.12.1",
