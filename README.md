@@ -1,10 +1,11 @@
 # Automatically upgrade your NPM dependencies to the latest version!
 
 [![Dependencies](https://img.shields.io/david/mrodrig/updep.svg?style=flat-square)](https://www.npmjs.org/package/updep)
-[![Build Status](https://travis-ci.org/mrodrig/updep.svg?branch=master)](https://travis-ci.org/mrodrig/updep)
 [![Downloads](http://img.shields.io/npm/dm/updep.svg)](https://www.npmjs.org/package/updep)
 [![NPM version](https://img.shields.io/npm/v/updep.svg)](https://www.npmjs.org/package/updep)
 [![Known Vulnerabilities](https://snyk.io/test/npm/updep/badge.svg)](https://snyk.io/test/npm/updep)
+[![Build Status](https://travis-ci.org/mrodrig/updep.svg?branch=master)](https://travis-ci.org/mrodrig/updep)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=rodrigues.mi%40husky.neu.edu&item_name=Open+Source+Software+Development+-+Node+Modules&currency_code=USD&source=url)
 
 This node module will convert an array of JSON documents to a CSV string.
 Column headings will be automatically generated based on the keys of the JSON documents. Nested documents will have a '.' appended between the keys.
@@ -15,28 +16,33 @@ The columns headings will be used as the JSON document keys.  All lines must hav
 ## Installation
 
 ```bash
-$ npm install updep
+$ npm install -g updep
+```
+
+## Upgrading
+```bash
+$ npm update -g updep
 ```
 
 ## Usage
 
-```bash
-updep -p <path_to>/package.json
 ```
+Usage: updep <package.json> [options]
 
-### API
+Options:
+  -v, --version                     output the version number
+  -p, --version-prefix <prefix>     Optional package version prefix to prepend (default: "^")
+  -s, --indent-spaces <num_spaces>  Number of spaces of indentation for package.json (default: 4)
+  -i, --version-increment [level]   Version increment level (default: "patch")
+  -V, --verbose                     Verbose mode
+  -h, --help                        output usage information
 
-#### Command Line Flags
-
-* `-h` Prints the usage information.
-* `-p` Specifies the path to the package.json to update.
-  * Example: `-p ../../package.json`
-* `-vp` Specifies a version prefix
-  * Example: `-vp '~'`
-* `-sp` Specifies the number of spaces for indentation (Default: 4)
-  * Example `-sp 2`
-* `-inc` Specifies to increment the patch version by 1 (ie. 0.0.1)
-  * Note: No arguments are required for this.
+Examples:
+  $ updep --help
+  $ updep -h
+  $ updep package.json -p ^ -i minor
+  $ updep package.json -p "~" -s 4 -i major
+```
 
 
 ## Tests
@@ -44,20 +50,11 @@ updep -p <path_to>/package.json
 Coming soon...
 
 ```bash
-npm test
+npm run lint && npm test
 ```
 
-_Note_: This requires `mocha`, `should`, `async`, and `underscore`.
-
-To see test coverage, please run:
-```bash
-npm run coverage
-```
+_Note_: This requires `mocha` and `should`.
 
 ## Features
 
-- Upgrades your package.json to have the latest versions for dependencies and devDependencies
-
-## F.A.Q.
-
-Coming soon...
+- Upgrades your package.json to have the latest versions for dependencies and devDependencies.
