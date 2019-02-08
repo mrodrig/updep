@@ -12,6 +12,7 @@ program
     .option('-s, --indent-spaces <num_spaces>', 'Number of spaces of indentation for package.json', 4)
     .option('-i, --version-increment [level]', 'Version increment level', 'patch')
     .option('-V, --verbose', 'Verbose mode', false)
+    .option('-U, --upgrade-level [level]', 'Package version upgrade level', 'major')
     .on('--help', utilities.printExamples)
     .parse(process.argv);
 
@@ -24,6 +25,9 @@ function validateOptions() {
     if (!validIncrementLevels.includes(program.versionIncrement)) {
         return invalidOption('Invalid version increment level provided. Valid levels are: ' + validIncrementLevels);
     }
+    if (!validIncrementLevels.includes(program.upgradeLevel)) {
+        return invalidOption('Invalid dependency version upgrade increment level provided. Valid levels are: ' + validIncrementLevels);
+    }
 
     VERBOSE = program.verbose;
 
@@ -33,7 +37,8 @@ function validateOptions() {
         options: {
             indentationSpaces: parseInt(program.indentSpaces, 10),
             versionPrefix: program.versionPrefix,
-            versionIncrement: program.versionIncrement
+            versionIncrement: program.versionIncrement,
+            dependencyUpgradeLevel: program.upgradeLevel
         }
     });
 }
