@@ -69,10 +69,10 @@ function updateDeps(params, listKey) {
 
 function getLatestVersion(packageName) {
     return request({
-        url: 'http://registry.npmjs.org/' + packageName + '/latest',
+        url: 'http://registry.npmjs.org/' + packageName,
         json: true
     })
-        .then((response) => response.body.version);
+        .then((response) => response.body['dist-tags'].latest);
 }
 
 function constructVersionNumber(prefix, versionNumber) {
