@@ -56,10 +56,11 @@ function updateDeps(params, listKey) {
     if (params.package[listKey]) {
         let dependencies = Object.keys(params.package[listKey]);
         return Promise.all(
-            dependencies.map((packageName) => getLatestVersion(packageName)
-                .then((latestVersion) => {
-                    params.package[listKey][packageName] = constructVersionNumber(params.options.versionPrefix, latestVersion);
-                    console.log('    -> Updated %s@%s', packageName, latestVersion);
+            dependencies.map((packageName) => getAllVersions(packageName)
+                .then((versions) => findNewVersionForUpgrade(versions, params.options.dependencyUpgradeLevel))
+                .then((newVersion) => {
+                    params.package[listKey][packageName] = constructVersionNumber(params.options.versionPrefix, newVersion);
+                    console.log('    -> Updated %s@%s', packageName, newVersion);
                 }))
         )
             .then(() => params);
@@ -67,12 +68,27 @@ function updateDeps(params, listKey) {
     return params;
 }
 
-function getLatestVersion(packageName) {
+function getAllVersions(packageName) {
     return request({
         url: 'http://registry.npmjs.org/' + packageName,
         json: true
     })
-        .then((response) => response.body['dist-tags'].latest);
+        .then((response) => ({
+            latest: response.body['dist-tags'].latest,
+            versions: Object.keys(response.body.versions)
+        }));
+}
+
+function findNewVersionForUpgrade(versions, dependencyUpgradeLevelOption) {
+    switch (dependencyUpgradeLevelOption) {
+        case 'patch':
+            return versions.latest;
+        case 'minor':
+            return versions.latest;
+        case 'major':
+        default:
+            return versions.latest;
+    }
 }
 
 function constructVersionNumber(prefix, versionNumber) {
