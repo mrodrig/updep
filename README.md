@@ -35,6 +35,7 @@ Options:
   -s, --indent-spaces <num_spaces>  Number of spaces of indentation for package.json (default: 4)
   -i, --version-increment [level]   Version increment level (default: "patch")
   -V, --verbose                     Verbose mode
+  -U, --upgrade-level [level]       Dependency version upgrade level (default: "major")
   -h, --help                        output usage information
 
 Examples:

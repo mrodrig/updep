@@ -12,7 +12,7 @@ program
     .option('-s, --indent-spaces <num_spaces>', 'Number of spaces of indentation for package.json', 4)
     .option('-i, --version-increment [level]', 'Version increment level', 'patch')
     .option('-V, --verbose', 'Verbose mode', false)
-    .option('-U, --upgrade-level [level]', 'Package version upgrade level', 'major')
+    .option('-U, --upgrade-level [level]', 'Dependency version upgrade level', 'major')
     .on('--help', utilities.printExamples)
     .parse(process.argv);
 
