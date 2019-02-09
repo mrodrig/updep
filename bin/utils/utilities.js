@@ -56,10 +56,15 @@ function updateDeps(params, listKey) {
     if (params.package[listKey]) {
         let dependencies = Object.keys(params.package[listKey]);
         return Promise.all(
-            dependencies.map((packageName) => getLatestVersion(packageName)
-                .then((latestVersion) => {
-                    params.package[listKey][packageName] = constructVersionNumber(params.options.versionPrefix, latestVersion);
-                    console.log('    -> Updated %s@%s', packageName, latestVersion);
+            dependencies.map((packageName) => getAllVersions(packageName)
+                .then((versions) => findNewVersionForUpgrade({
+                    versions: versions,
+                    currentVersion: params.package[listKey][packageName],
+                    dependencyUpgradeLevel: params.options.dependencyUpgradeLevel
+                }))
+                .then((newVersion) => {
+                    params.package[listKey][packageName] = constructVersionNumber(params.options.versionPrefix, newVersion);
+                    console.log('    -> Updated %s@%s', packageName, newVersion);
                 }))
         )
             .then(() => params);
@@ -67,12 +72,54 @@ function updateDeps(params, listKey) {
     return params;
 }
 
-function getLatestVersion(packageName) {
+function getAllVersions(packageName) {
     return request({
-        url: 'http://registry.npmjs.org/' + packageName + '/latest',
+        url: 'http://registry.npmjs.org/' + packageName,
         json: true
     })
-        .then((response) => response.body.version);
+        .then((response) => ({
+            latest: response.body['dist-tags'].latest,
+            all: Object.keys(response.body.versions)
+        }));
+}
+
+function findNewVersionForUpgrade(params) {
+    let newVersion = getAllMatchingVersions(params);
+
+    switch (params.dependencyUpgradeLevel) {
+        case 'patch':
+        case 'minor':
+            return newVersion;
+        case 'major':
+        default:
+            return params.versions.latest;
+    }
+}
+
+function stripVersionPrefixes(currentVersion) {
+    return currentVersion
+        .replace('^', '')
+        .replace('~', '');
+}
+
+function getAllMatchingVersions(params) {
+    const [major, minor] = stripVersionPrefixes(params.currentVersion).split('.'),
+        minorVersionTest = new RegExp('^' + major + '\\.\\d*\\.\\d*'),
+        patchVersionTest = new RegExp('^' + major + '\\.' + minor + '\\.\\d*');
+
+    switch (params.dependencyUpgradeLevel) {
+        case 'patch':
+            return params.versions.all
+                .filter((version) => patchVersionTest.test(version))
+                .slice(-1)
+                .pop();
+        case 'minor':
+        default:
+            return params.versions.all
+                .filter((version) => minorVersionTest.test(version))
+                .slice(-1)
+                .pop();
+    }
 }
 
 function constructVersionNumber(prefix, versionNumber) {

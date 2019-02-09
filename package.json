@@ -2,7 +2,7 @@
     "author": "mrodrig",
     "name": "updep",
     "description": "An automated dependency upgrade module for NodeJS.",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "repository": {
         "type": "git",
         "url": "http://github.com/mrodrig/updep.git"
@@ -33,7 +33,7 @@
         "commander": "2.19.0"
     },
     "devDependencies": {
-        "eslint": "5.12.1",
+        "eslint": "5.13.0",
         "mocha": "5.2.0"
     },
     "engines": {
