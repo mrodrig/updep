@@ -57,7 +57,11 @@ function updateDeps(params, listKey) {
         let dependencies = Object.keys(params.package[listKey]);
         return Promise.all(
             dependencies.map((packageName) => getAllVersions(packageName)
-                .then((versions) => findNewVersionForUpgrade(versions, params.options.dependencyUpgradeLevel))
+                .then((versions) => findNewVersionForUpgrade({
+                    versions: versions,
+                    currentVersion: params.package[listKey][packageName],
+                    dependencyUpgradeLevel: params.options.dependencyUpgradeLevel
+                }))
                 .then((newVersion) => {
                     params.package[listKey][packageName] = constructVersionNumber(params.options.versionPrefix, newVersion);
                     console.log('    -> Updated %s@%s', packageName, newVersion);
@@ -75,19 +79,46 @@ function getAllVersions(packageName) {
     })
         .then((response) => ({
             latest: response.body['dist-tags'].latest,
-            versions: Object.keys(response.body.versions)
+            all: Object.keys(response.body.versions)
         }));
 }
 
-function findNewVersionForUpgrade(versions, dependencyUpgradeLevelOption) {
-    switch (dependencyUpgradeLevelOption) {
+function findNewVersionForUpgrade(params) {
+    let newVersion = getAllMatchingVersions(params);
+
+    switch (params.dependencyUpgradeLevel) {
         case 'patch':
-            return versions.latest;
         case 'minor':
-            return versions.latest;
+            return newVersion;
         case 'major':
         default:
-            return versions.latest;
+            return params.versions.latest;
+    }
+}
+
+function stripVersionPrefixes(currentVersion) {
+    return currentVersion
+        .replace('^', '')
+        .replace('~', '');
+}
+
+function getAllMatchingVersions(params) {
+    const [major, minor] = stripVersionPrefixes(params.currentVersion).split('.'),
+        minorVersionTest = new RegExp('^' + major + '\\.\\d*\\.\\d*'),
+        patchVersionTest = new RegExp('^' + major + '\\.' + minor + '\\.\\d*');
+
+    switch (params.dependencyUpgradeLevel) {
+        case 'patch':
+            return params.versions.all
+                .filter((version) => patchVersionTest.test(version))
+                .slice(-1)
+                .pop();
+        case 'minor':
+        default:
+            return params.versions.all
+                .filter((version) => minorVersionTest.test(version))
+                .slice(-1)
+                .pop();
     }
 }
 
