@@ -1,0 +1,16 @@
+{
+  "author": "mrodrig",
+  "name": "minor-upgrade",
+  "version": "0.0.1",
+  "dependencies": {
+    "bluebird": "^3.5.3",
+    "request": "^2.88.0",
+    "semver": "^5.6.0",
+    "underscore": "^1.9.1"
+  },
+  "devDependencies": {
+    "commander": "^2.19.0",
+    "eslint": "^5.13.0",
+    "mocha": "^5.2.0"
+  }
+}
