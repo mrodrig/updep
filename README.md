@@ -1,17 +1,17 @@
-# Automatically upgrade your NPM dependencies to the latest version!
+# updep
 
 [![Dependencies](https://img.shields.io/david/mrodrig/updep.svg?style=flat-square)](https://www.npmjs.org/package/updep)
 [![Downloads](http://img.shields.io/npm/dm/updep.svg)](https://www.npmjs.org/package/updep)
 [![NPM version](https://img.shields.io/npm/v/updep.svg)](https://www.npmjs.org/package/updep)
 [![Known Vulnerabilities](https://snyk.io/test/npm/updep/badge.svg)](https://snyk.io/test/npm/updep)
 [![Build Status](https://travis-ci.org/mrodrig/updep.svg?branch=master)](https://travis-ci.org/mrodrig/updep)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=rodrigues.mi%40husky.neu.edu&item_name=Open+Source+Software+Development+-+Node+Modules&currency_code=USD&source=url)
 
-This node module will convert an array of JSON documents to a CSV string.
-Column headings will be automatically generated based on the keys of the JSON documents. Nested documents will have a '.' appended between the keys.
+Automatically upgrade your NPM dependencies to the latest version!
 
-It is also capable of converting CSV of the same form back into the original array of JSON documents.
-The columns headings will be used as the JSON document keys.  All lines must have the same exact number of CSV values.
+This module provides the CLI functionality that you've been looking for to
+tackle technical debt with NPM modules head-on. You'll be up-to-date in no time 
+with the functionality to specify the upgrade level to run or you can perform a
+dry-run to see what upgrades would be made without actually changing anything.
 
 ## Installation
 

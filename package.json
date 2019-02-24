@@ -2,7 +2,7 @@
     "author": "mrodrig",
     "name": "updep",
     "description": "An automated dependency upgrade module for NodeJS.",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "repository": {
         "type": "git",
         "url": "http://github.com/mrodrig/updep.git"
