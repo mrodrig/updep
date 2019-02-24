@@ -2,7 +2,7 @@
     "author": "mrodrig",
     "name": "updep",
     "description": "An automated dependency upgrade module for NodeJS.",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "repository": {
         "type": "git",
         "url": "http://github.com/mrodrig/updep.git"
@@ -11,6 +11,8 @@
         "updep": "./bin/updep.js"
     },
     "scripts": {
+        "update": "node ./bin/updep package.json -p '' -s 4 -i minor -U minor",
+        "update:dry-run": "node ./bin/updep package.json -p '' -s 4 -i minor -U minor --dry-run",
         "test": "./node_modules/.bin/mocha --reporter spec",
         "lint": "./node_modules/.bin/eslint bin test"
     },
@@ -33,7 +35,7 @@
         "commander": "2.19.0"
     },
     "devDependencies": {
-        "eslint": "5.13.0",
+        "eslint": "5.14.1",
         "mocha": "5.2.0"
     },
     "engines": {

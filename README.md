@@ -36,13 +36,14 @@ Options:
   -i, --version-increment [level]   Version increment level (default: "patch")
   -V, --verbose                     Verbose mode
   -U, --upgrade-level [level]       Dependency version upgrade level (default: "major")
+  -D, --dry-run                     Show the upgrades that would be performed instead of upgrading
   -h, --help                        output usage information
 
 Examples:
   $ updep --help
   $ updep -h
-  $ updep package.json -p ^ -i minor
-  $ updep package.json -p "~" -s 4 -i major
+  $ updep package.json -p ^ -i major
+  $ updep package.json -p "~" -s 4 -i minor -U patch --dry-run
 ```
 
 

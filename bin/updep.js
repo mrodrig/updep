@@ -13,6 +13,7 @@ program
     .option('-i, --version-increment [level]', 'Version increment level', 'patch')
     .option('-V, --verbose', 'Verbose mode', false)
     .option('-U, --upgrade-level [level]', 'Dependency version upgrade level', 'major')
+    .option('-D, --dry-run', 'Show the upgrades that would be performed instead of upgrading', false)
     .on('--help', utilities.printExamples)
     .parse(process.argv);
 
@@ -38,7 +39,8 @@ function validateOptions() {
             indentationSpaces: parseInt(program.indentSpaces, 10),
             versionPrefix: program.versionPrefix,
             versionIncrement: program.versionIncrement,
-            dependencyUpgradeLevel: program.upgradeLevel
+            dependencyUpgradeLevel: program.upgradeLevel,
+            dryRun: program.dryRun
         }
     });
 }
