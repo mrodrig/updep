@@ -52,7 +52,14 @@ function parsePackage(params) {
 }
 
 function updateDeps(params, listKey) {
-    console.log('  -> Starting to update %s', listKey);
+    switch (params.options.dryRun) {
+        case true:
+            console.log('  Analyzing %s:', listKey);
+            break;
+        case false:
+        default:
+            console.log('  -> Starting to update %s', listKey);
+    }
     if (params.package[listKey]) {
         let dependencies = Object.keys(params.package[listKey]);
         return Promise.all(
@@ -63,8 +70,17 @@ function updateDeps(params, listKey) {
                     dependencyUpgradeLevel: params.options.dependencyUpgradeLevel
                 }))
                 .then((newVersion) => {
-                    params.package[listKey][packageName] = constructVersionNumber(params.options.versionPrefix, newVersion);
-                    console.log('    -> Updated %s@%s', packageName, newVersion);
+                    newVersion = constructVersionNumber(params.options.versionPrefix, newVersion);
+                    switch (params.options.dryRun) {
+                        case true:
+                            console.log('      ' + packageName + ':    ' + params.package[listKey][packageName] + ' --> ' + newVersion);
+                            return;
+                        case false:
+                        default:
+                            params.package[listKey][packageName] = newVersion;
+                            console.log('    -> Updated %s@%s', packageName, newVersion);
+                    }
+
                 }))
         )
             .then(() => params);
@@ -127,25 +143,33 @@ function constructVersionNumber(prefix, versionNumber) {
 }
 
 function doneUpdating(params) {
-    console.log('  -> Done updating dependencies and devDependencies.');
+    if (!params.options.dryRun) {
+        console.log('  -> Done updating dependencies and devDependencies.');
+    }
     return params;
 }
 
 function incrementPackageVersion(params) {
-    params.package.version = semver.inc(params.package.version, params.options.versionIncrement);
-    console.log('-> Updated version to: %s', params.package.version);
+    if (!params.options.dryRun) {
+        params.package.version = semver.inc(params.package.version, params.options.versionIncrement);
+        console.log('-> Updated version to: %s', params.package.version);
+    }
     return params;
 }
 
 function processPackage(params) {
     // Convert the package to a JSON string with the specified indentation
-    params.package = JSON.stringify(params.package, null, params.options.indentationSpaces);
+    if (!params.options.dryRun) {
+        params.package = JSON.stringify(params.package, null, params.options.indentationSpaces);
+    }
     return params;
 }
 
 function writePackage(params) {
-    console.log('-> Writing the updated version to %s', params.packagePath);
-    writeFileSync(params.packagePath, params.package, 'utf8');
+    if (!params.options.dryRun) {
+        console.log('-> Writing the updated version to %s', params.packagePath);
+        writeFileSync(params.packagePath, params.package, 'utf8');
+    }
     return params;
 }
 
