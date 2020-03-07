@@ -12,9 +12,9 @@ program
     .usage('<package.json> [options]')
     .option('-p, --version-prefix <prefix>', 'Optional package version prefix to prepend', '^')
     .option('-s, --indent-spaces <num_spaces>', 'Number of spaces of indentation for package.json', 4)
-    .option('-i, --version-increment [level]', 'Version increment level', 'patch')
+    .option('-i, --version-increment [level]', 'Package.json version increment level {major|minor|patch}', 'patch')
     .option('-V, --verbose', 'Verbose mode', false)
-    .option('-U, --upgrade-level [level]', 'Dependency version upgrade level', 'major')
+    .option('-U, --upgrade-level [level]', 'Dependency version upgrade level {major|minor|patch}', 'major')
     .option('-D, --dry-run', 'Show the upgrades that would be performed instead of upgrading', false)
     .on('--help', utilities.printExamples)
     .parse(process.argv);
