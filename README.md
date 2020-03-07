@@ -33,9 +33,9 @@ Options:
   -v, --version                     output the version number
   -p, --version-prefix <prefix>     Optional package version prefix to prepend (default: "^")
   -s, --indent-spaces <num_spaces>  Number of spaces of indentation for package.json (default: 4)
-  -i, --version-increment [level]   Version increment level (default: "patch")
+  -i, --version-increment [level]   Package.json version increment level {major|minor|patch} (default: "patch")
   -V, --verbose                     Verbose mode
-  -U, --upgrade-level [level]       Dependency version upgrade level (default: "major")
+  -U, --upgrade-level [level]       Dependency version upgrade level {major|minor|patch} (default: "major")
   -D, --dry-run                     Show the upgrades that would be performed instead of upgrading
   -h, --help                        output usage information
 

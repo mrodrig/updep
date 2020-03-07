@@ -3,12 +3,11 @@
 #    - CC_TEST_REPORTER_ID=
 language: node_js
 node_js:
+  - "12"
   - "11"
   - "10"
   - "9"
   - "8"
-  - "7"
-  - "6"
 sudo: false
 #before_script:
 #  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
