@@ -3,6 +3,7 @@
 #    - CC_TEST_REPORTER_ID=
 language: node_js
 node_js:
+  - "14"
   - "12"
   - "11"
   - "10"
