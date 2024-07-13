@@ -2,9 +2,8 @@
 
 const path = require('path'),
     {readFileSync, writeFileSync} = require('fs'),
-    promise = require('bluebird'),
     semver = require('semver'),
-    request = promise.promisify(require('request'));
+    axios = require('axios');
 
 module.exports = {
     printExamples,
@@ -88,15 +87,13 @@ function updateDeps(params, listKey) {
     return params;
 }
 
-function getAllVersions(packageName) {
-    return request({
-        url: 'http://registry.npmjs.org/' + packageName,
-        json: true
-    })
-        .then((response) => ({
-            latest: response.body['dist-tags'].latest,
-            all: Object.keys(response.body.versions)
-        }));
+async function getAllVersions(packageName) {
+    const response = await axios.get(`http://registry.npmjs.org/${packageName}`)
+    
+    return {
+        latest: response.data['dist-tags'].latest,
+        all: Object.keys(response.data.versions)
+    };
 }
 
 function findNewVersionForUpgrade(params) {
